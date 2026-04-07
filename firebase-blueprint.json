@@ -1,0 +1,23 @@
+{
+  "entities": {
+    "Product": {
+      "title": "Product",
+      "description": "A product in the pet store.",
+      "type": "object",
+      "properties": {
+        "nome": { "type": "string" },
+        "descricao": { "type": "string" },
+        "categoria": { "type": "string" },
+        "imageUrl": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["nome", "descricao", "categoria", "imageUrl", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/produtos/{productId}": {
+      "schema": "Product",
+      "description": "Collection of products."
+    }
+  }
+}
