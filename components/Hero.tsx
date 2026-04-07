@@ -4,11 +4,11 @@ import Image from 'next/image';
 
 export default function Hero() {
   return (
-    <section id="inicio" className="relative min-h-[80vh] flex items-center px-6 overflow-hidden">
+    <section id="inicio" className="relative min-h-[80vh] flex items-center px-6 overflow-hidden pt-20">
       <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         <div className="z-10">
           <span className="text-[#914d00] font-bold tracking-widest text-sm font-label uppercase bg-[#feccba]/50 px-3 py-1 rounded-full mb-6 inline-block">Cuidado Premium</span>
-          <h1 className="font-headline font-extrabold text-[#2e140a] text-5xl md:text-7xl leading-[1.1] mb-6 tracking-tighter">
+          <h1 className="font-headline font-extrabold text-[#2e140a] text-4xl md:text-6xl leading-[1.1] mb-6 tracking-tighter">
             Tudo o que seu melhor amigo precisa em um só lugar
           </h1>
           <p className="text-xl text-[#554336] mb-10 max-w-lg leading-relaxed">
