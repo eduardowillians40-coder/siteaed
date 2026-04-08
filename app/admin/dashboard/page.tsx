@@ -2,7 +2,8 @@
 import { useState, useEffect } from 'react';
 import NextImage from 'next/image';
 import { supabase } from '@/lib/supabase';
-import { Camera, Trash2, Loader2 } from 'lucide-react';
+import { Camera, Trash2, Loader2, LogOut } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 const CATEGORIAS = [
   'Rações para Cães',
@@ -18,6 +19,7 @@ const CATEGORIAS = [
 ];
 
 export default function AdminDashboard() {
+  const router = useRouter();
   const [produtos, setProdutos] = useState<any[]>([]);
   const [nome, setNome] = useState('');
   const [descricao, setDescricao] = useState('');
@@ -30,6 +32,16 @@ export default function AdminDashboard() {
   const [muralDesc, setMuralDesc] = useState('');
   const [muralImage, setMuralImage] = useState<File | null>(null);
   const [muralLoading, setMuralLoading] = useState(false);
+
+  useEffect(() => {
+    async function checkAuth() {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) {
+        router.push('/admin');
+      }
+    }
+    checkAuth();
+  }, [router]);
 
   const fetchProdutos = async () => {
     const { data, error } = await supabase.from('produtos').select('*');
@@ -241,6 +253,11 @@ export default function AdminDashboard() {
   return (
     <div className="p-4 md:p-8 bg-gray-50 min-h-screen max-w-7xl mx-auto">
       <h1 className="text-3xl font-bold mb-8 text-center">Painel Administrativo</h1>
+      <div className="flex justify-end mb-4">
+        <button onClick={async () => { await supabase.auth.signOut(); router.push('/admin'); }} className="flex items-center gap-2 text-red-500 hover:text-red-700">
+          <LogOut size={20} /> Sair
+        </button>
+      </div>
       
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Coluna Esquerda: Produtos */}
